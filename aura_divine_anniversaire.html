@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aura Divine — Tableau de chants d'anniversaire</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#2a2a2a;font-family:system-ui,sans-serif;}
+.page{display:none;max-width:680px;margin:0 auto;}
+.page.active{display:block;}
+.hero{background:#1a1612;padding:1.1rem 1.25rem;display:flex;align-items:center;gap:12px;}
+.logo{width:58px;height:58px;border-radius:12px;overflow:hidden;border:2px solid #C9960C;flex-shrink:0;}
+.logo img{width:100%;height:100%;object-fit:cover;display:block;}
+.htxt h1{font-size:19px;font-weight:700;color:#f5e6b8;}
+.htxt p{font-size:10px;color:#8a7a50;margin-top:2px;text-transform:uppercase;letter-spacing:0.05em;}
+.hbtn{margin-left:auto;}
+.pbtn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:30px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #C9960C;background:transparent;color:#e8c84a;white-space:nowrap;}
+.pbtn:hover{background:#C9960C;color:#1a1612;}
+.band{background:#C9960C;padding:9px 1.25rem;display:flex;align-items:center;gap:10px;}
+.band span{font-size:11px;font-weight:700;color:#1a1612;text-transform:uppercase;letter-spacing:0.07em;white-space:nowrap;}
+.band input{background:transparent;border:none;outline:none;font-size:13px;color:#1a1612;flex:1;font-weight:500;}
+.band input::placeholder{color:#7a5c00;}
+.body{padding:0.9rem 1.25rem 0;}
+.ftabs{display:flex;gap:7px;margin-bottom:1rem;flex-wrap:wrap;}
+.ft{padding:6px 15px;border-radius:30px;font-size:12px;cursor:pointer;border:1.5px solid #555;background:#3a3a3a;color:#b89030;font-weight:600;}
+.ft.on{background:#1a1612;color:#e8c84a;border-color:#1a1612;}
+.sc{background:#3a3a3a;border:1.5px solid #555;border-radius:16px;margin-bottom:9px;overflow:hidden;}
+.sc:hover{border-color:#C9960C;}
+.sh{padding:13px 15px;display:flex;align-items:center;gap:11px;cursor:pointer;user-select:none;}
+.sn{font-size:11px;font-weight:700;color:#C9960C;width:22px;flex-shrink:0;}
+.sl{font-size:15px;font-weight:700;color:#f0e8d0;flex:1;}
+.sbg{font-size:11px;background:#fdf6e3;color:#C9960C;border:1px solid #f0d878;border-radius:20px;padding:2px 9px;display:none;font-weight:600;}
+.sbg.v{display:inline-block;}
+.sch{font-size:15px;color:#C9960C;transition:transform 0.2s;}
+.sb{display:none;border-top:1.5px solid #fdf6e3;}
+.sb.op{display:block;}
+.np{background:#1a1612;padding:11px 15px;display:flex;align-items:center;gap:11px;}
+.npi{width:34px;height:34px;border-radius:8px;background:#C9960C;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.npi i{font-size:17px;color:#1a1612;}
+.npl{font-size:10px;color:#8a7a50;text-transform:uppercase;letter-spacing:0.05em;}
+.nps{font-size:13px;color:#f5e6b8;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sl2{padding:0 15px;}
+.si{display:flex;align-items:flex-start;gap:9px;padding:10px 0;border-bottom:1px solid #faf6ec;}
+.si:last-child{border-bottom:none;}
+.vb{width:38px;height:42px;border-radius:9px;border:1.5px solid #555;background:#444;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;flex-shrink:0;}
+.vb:hover,.vb.on{background:#C9960C;border-color:#C9960C;}
+.vb i{font-size:12px;color:#e8c84a;}
+.vb.on i,.vb:hover i{color:#1a1612;}
+.vb span{font-size:11px;font-weight:700;color:#e8c84a;}
+.vb.on span,.vb:hover span{color:#1a1612;}
+.sc2{flex:1;min-width:0;}
+.st{font-size:14px;color:#f0e8d0;font-weight:600;}
+.sm{font-size:11px;color:#b89030;margin-top:2px;}
+.mc{display:inline-flex;align-items:center;gap:5px;margin-top:5px;font-size:12px;padding:3px 9px;border-radius:6px;border:1px solid #555;background:#444;color:#e8c84a;text-decoration:none;}
+.mc:hover{background:#fdf6e3;}
+audio{width:100%;height:30px;margin-top:5px;accent-color:#C9960C;}
+.ns{font-size:13px;color:#c8b870;font-style:italic;padding:10px 0;}
+.aa{background:#3a3a3a;border:1.5px solid #555;border-radius:12px;padding:12px 14px;margin:0 15px 14px 15px;}
+.at{display:flex;gap:7px;margin-bottom:7px;}
+.at input{flex:1;padding:8px 13px;font-size:13px;border-radius:30px;border:1.5px solid #666;background:#4a4a4a;color:#f0e8d0;outline:none;}
+.at input:focus{border-color:#C9960C;background:#505050;}
+.at input::placeholder{color:#888;}
+.at button{padding:8px 16px;font-size:13px;border-radius:30px;border:none;background:#C9960C;color:#1a1612;cursor:pointer;font-weight:700;white-space:nowrap;}
+.at button:hover{background:#a87c00;}
+.am{display:flex;gap:7px;align-items:center;}
+.am input{flex:1;padding:6px 12px;font-size:12px;border-radius:30px;border:1.5px solid #666;background:#4a4a4a;color:#f0e8d0;outline:none;}
+.am input:focus{border-color:#C9960C;background:#505050;}
+.am input::placeholder{color:#888;}
+.ul{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;font-size:12px;border-radius:30px;border:1.5px solid #666;background:#4a4a4a;color:#b89030;cursor:pointer;white-space:nowrap;}
+.ul:hover{border-color:#C9960C;color:#C9960C;}
+.fi{display:none;}
+.ah{font-size:11px;color:#888;margin-top:5px;}
+.sbar{background:#1a1612;padding:13px 1.25rem;display:flex;align-items:center;gap:11px;margin-top:1rem;}
+.sbar p{font-size:13px;color:#8a7a50;flex:1;}
+.sbar button{padding:7px 16px;font-size:12px;border-radius:30px;border:1.5px solid #C9960C;background:transparent;color:#e8c84a;cursor:pointer;font-weight:600;}
+.sbar button:hover{background:#C9960C;color:#1a1612;}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:1rem;}
+.stc{background:#3a3a3a;border:1.5px solid #555;border-radius:13px;padding:13px;text-align:center;}
+.stn{font-size:26px;font-weight:700;color:#C9960C;}
+.stl{font-size:11px;color:#aaa;margin-top:2px;text-transform:uppercase;letter-spacing:0.03em;}
+.ctrl{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:1rem;}
+.ctrl input,.ctrl select{padding:7px 13px;font-size:13px;border-radius:30px;border:1.5px solid #555;background:#3a3a3a;color:#f0e8d0;outline:none;}
+.ctrl input{flex:1;min-width:130px;}
+.ctrl input::placeholder{color:#888;}
+.ctrl select{cursor:pointer;}
+.ctrl input:focus,.ctrl select:focus{border-color:#C9960C;}
+.ac{background:#3a3a3a;border:1.5px solid #555;border-radius:13px;padding:13px 15px;margin-bottom:9px;}
+.ac:hover{border-color:#C9960C;}
+.atg{display:inline-block;font-size:10px;background:#1a1612;color:#e8c84a;border-radius:20px;padding:2px 9px;margin-bottom:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;}
+.att{font-size:15px;font-weight:700;color:#f0e8d0;margin-bottom:3px;}
+.atm{font-size:12px;color:#b89030;}
+.af{display:flex;align-items:center;margin-top:9px;}
+.vw{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:30px;border:1.5px solid #555;background:#444;color:#e8c84a;font-size:13px;font-weight:700;cursor:pointer;}
+.vw:hover,.vw.on{background:#C9960C;border-color:#C9960C;color:#1a1612;}
+.emp{text-align:center;padding:2.5rem 1rem;color:#c8b870;}
+.emp i{font-size:38px;display:block;margin-bottom:10px;}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: MAIN BOARD -->
+<div class="page active" id="p1">
+  <div class="hero">
+    <div class="logo"><img src="data:image/jpeg;base64,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" alt="Aura Divine"/></div>
+    <div class="htxt">
+      <h1>Aura Divine</h1>
+      <p>Tableau de chants d'anniversaire</p>
+    </div>
+    <div class="hbtn">
+      <button class="pbtn" onclick="goTo('p2')"><i class="ti ti-layout-list"></i> Toutes les suggestions (All suggestions)</button>
+    </div>
+  </div>
+  <div class="band">
+    <span><i class="ti ti-user" style="font-size:13px;vertical-align:-1px;margin-right:3px;"></i>Nom (Name)</span>
+    <input id="uname" type="text" placeholder="Entrez votre nom… (Enter your name…)"/>
+  </div>
+  <div class="body">
+    <div class="ftabs">
+      <div class="ft on" onclick="setF('all',this)">Toutes les sections (All sections)</div>
+      <div class="ft" onclick="setF('sug',this)">Avec suggestions (Has suggestions)</div>
+    </div>
+    <div id="sections">
+
+    <div class="sc" id="card-entree">
+      <div class="sh" onclick="toggle('entree')">
+        <span class="sn">01</span>
+        <span class="sl">Entrée</span>
+        <span class="sbg v" id="bg-entree">0</span>
+        <i id="ch-entree" class="ti ti-chevron-down sch" style="transform:rotate(180deg);"></i>
+      </div>
+      <div class="sb op" id="b-entree">
+        <div class="np">
+          <div class="npi"><i class="ti ti-music"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="npl">Chant actuel (Currently assigned)</div>
+            <div class="nps">Siyahamba</div>
+          </div>
+        </div>
+        <div class="sl2" id="sl-entree">
+          <p class="ns">Aucune suggestion — soyez le premier ! (No suggestions yet)</p>
+        </div>
+        <div class="aa">
+          <div class="at">
+            <input id="si-entree" type="text" placeholder="Nom du chant… (Song name…)" onkeydown="if(event.key==='Enter')add('entree')"/>
+            <button onclick="add('entree')">+ Ajouter (Add)</button>
+          </div>
+          <div class="am">
+            <input id="mi-entree" type="text" placeholder="Lien YouTube ou Instagram… (Paste link…)"/>
+            <label class="ul" for="fi-entree"><i class="ti ti-upload" style="font-size:13px;"></i> Audio</label>
+            <input class="fi" id="fi-entree" type="file" accept="audio/*" onchange="handleFile('entree',this)"/>
+          </div>
+          <p class="ah">Collez un lien YouTube / Instagram ou téléversez un fichier audio (Paste a YouTube / Instagram link, or upload an audio file)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" id="card-kyrie">
+      <div class="sh" onclick="toggle('kyrie')">
+        <span class="sn">02</span>
+        <span class="sl">Kyrie</span>
+        <span class="sbg v" id="bg-kyrie">0</span>
+        <i id="ch-kyrie" class="ti ti-chevron-down sch" style="transform:rotate(180deg);"></i>
+      </div>
+      <div class="sb op" id="b-kyrie">
+        <div class="np">
+          <div class="npi"><i class="ti ti-music"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="npl">Chant actuel (Currently assigned)</div>
+            <div class="nps">Vois sur ton chemin</div>
+          </div>
+        </div>
+        <div class="sl2" id="sl-kyrie">
+          <p class="ns">Aucune suggestion — soyez le premier ! (No suggestions yet)</p>
+        </div>
+        <div class="aa">
+          <div class="at">
+            <input id="si-kyrie" type="text" placeholder="Nom du chant… (Song name…)" onkeydown="if(event.key==='Enter')add('kyrie')"/>
+            <button onclick="add('kyrie')">+ Ajouter (Add)</button>
+          </div>
+          <div class="am">
+            <input id="mi-kyrie" type="text" placeholder="Lien YouTube ou Instagram… (Paste link…)"/>
+            <label class="ul" for="fi-kyrie"><i class="ti ti-upload" style="font-size:13px;"></i> Audio</label>
+            <input class="fi" id="fi-kyrie" type="file" accept="audio/*" onchange="handleFile('kyrie',this)"/>
+          </div>
+          <p class="ah">Collez un lien YouTube / Instagram ou téléversez un fichier audio (Paste a YouTube / Instagram link, or upload an audio file)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" id="card-gloria">
+      <div class="sh" onclick="toggle('gloria')">
+        <span class="sn">03</span>
+        <span class="sl">Gloria</span>
+        <span class="sbg v" id="bg-gloria">0</span>
+        <i id="ch-gloria" class="ti ti-chevron-down sch" style="transform:rotate(180deg);"></i>
+      </div>
+      <div class="sb op" id="b-gloria">
+        <div class="np">
+          <div class="npi"><i class="ti ti-music"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="npl">Chant actuel (Currently assigned)</div>
+            <div class="nps">Ton amour nous environne</div>
+          </div>
+        </div>
+        <div class="sl2" id="sl-gloria">
+          <p class="ns">Aucune suggestion — soyez le premier ! (No suggestions yet)</p>
+        </div>
+        <div class="aa">
+          <div class="at">
+            <input id="si-gloria" type="text" placeholder="Nom du chant… (Song name…)" onkeydown="if(event.key==='Enter')add('gloria')"/>
+            <button onclick="add('gloria')">+ Ajouter (Add)</button>
+          </div>
+          <div class="am">
+            <input id="mi-gloria" type="text" placeholder="Lien YouTube ou Instagram… (Paste link…)"/>
+            <label class="ul" for="fi-gloria"><i class="ti ti-upload" style="font-size:13px;"></i> Audio</label>
+            <input class="fi" id="fi-gloria" type="file" accept="audio/*" onchange="handleFile('gloria',this)"/>
+          </div>
+          <p class="ah">Collez un lien YouTube / Instagram ou téléversez un fichier audio (Paste a YouTube / Instagram link, or upload an audio file)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" id="card-meditation">
+      <div class="sh" onclick="toggle('meditation')">
+        <span class="sn">04</span>
+        <span class="sl">Méditation</span>
+        <span class="sbg v" id="bg-meditation">0</span>
+        <i id="ch-meditation" class="ti ti-chevron-down sch" style="transform:rotate(180deg);"></i>
+      </div>
+      <div class="sb op" id="b-meditation">
+        <div class="np">
+          <div class="npi"><i class="ti ti-music"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="npl">Chant actuel (Currently assigned)</div>
+            <div class="nps">Mpora ngusaba</div>
+          </div>
+        </div>
+        <div class="sl2" id="sl-meditation">
+          <p class="ns">Aucune suggestion — soyez le premier ! (No suggestions yet)</p>
+        </div>
+        <div class="aa">
+          <div class="at">
+            <input id="si-meditation" type="text" placeholder="Nom du chant… (Song name…)" onkeydown="if(event.key==='Enter')add('meditation')"/>
+            <button onclick="add('meditation')">+ Ajouter (Add)</button>
+          </div>
+          <div class="am">
+            <input id="mi-meditation" type="text" placeholder="Lien YouTube ou Instagram… (Paste link…)"/>
+            <label class="ul" for="fi-meditation"><i class="ti ti-upload" style="font-size:13px;"></i> Audio</label>
+            <input class="fi" id="fi-meditation" type="file" accept="audio/*" onchange="handleFile('meditation',this)"/>
+          </div>
+          <p class="ah">Collez un lien YouTube / Instagram ou téléversez un fichier audio (Paste a YouTube / Instagram link, or upload an audio file)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" id="card-acclamation">
+      <div class="sh" onclick="toggle('acclamation')">
+        <span class="sn">05</span>
+        <span class="sl">Acclamation</span>
+        <span class="sbg v" id="bg-acclamation">0</span>
+        <i id="ch-acclamation" class="ti ti-chevron-down sch" style="transform:rotate(180deg);"></i>
+      </div>
+      <div class="sb op" id="b-acclamation">
+        <div class="np">
+          <div class="npi"><i class="ti ti-music"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="npl">Chant actuel (Currently assigned)</div>
+            <div class="nps">Laudate Dominum</div>
+          </div>
+        </div>
+        <div class="sl2" id="sl-acclamation">
+          <p class="ns">Aucune suggestion — soyez le premier ! (No suggestions yet)</p>
+        </div>
+        <div class="aa">
+          <div class="at">
+            <input id="si-acclamation" type="text" placeholder="Nom du chant… (Song name…)" onkeydown="if(event.key==='Enter')add('acclamation')"/>
+            <button onclick="add('acclamation')">+ Ajouter (Add)</button>
+          </div>
+          <div class="am">
+            <input id="mi-acclamation" type="text" placeholder="Lien YouTube ou Instagram… (Paste link…)"/>
+            <label class="ul" for="fi-acclamation"><i class="ti ti-upload" style="font-size:13px;"></i> Audio</label>
+            <input class="fi" id="fi-acclamation" type="file" accept="audio/*" onchange="handleFile('acclamation',this)"/>
+          </div>
+          <p class="ah">Collez un lien YouTube / Instagram ou téléversez un fichier audio (Paste a YouTube / Instagram link, or upload an audio file)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" id="card-credo">
+      <div class="sh" onclick="toggle('credo')">
+        <span class="sn">06</span>
+        <span class="sl">Credo</span>
+        <span class="sbg v" id="bg-credo">0</span>
+        <i id="ch-credo" class="ti ti-chevron-down sch" style="transform:rotate(180deg);"></i>
+      </div>
+      <div class="sb op" id="b-credo">
+        <div class="np">
+          <div class="npi"><i class="ti ti-music"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="npl">Chant actuel (Currently assigned)</div>
+            <div class="nps">Credo New</div>
+          </div>
+        </div>
+        <div class="sl2" id="sl-credo">
+          <p class="ns">Aucune suggestion — soyez le premier ! (No suggestions yet)</p>
+        </div>
+        <div class="aa">
+          <div class="at">
+            <input id="si-credo" type="text" placeholder="Nom du chant… (Song name…)" onkeydown="if(event.key==='Enter')add('credo')"/>
+            <button onclick="add('credo')">+ Ajouter (Add)</button>
+          </div>
+          <div class="am">
+            <input id="mi-credo" type="text" placeholder="Lien YouTube ou Instagram… (Paste link…)"/>
+            <label class="ul" for="fi-credo"><i class="ti ti-upload" style="font-size:13px;"></i> Audio</label>
+            <input class="fi" id="fi-credo" type="file" accept="audio/*" onchange="handleFile('credo',this)"/>
+          </div>
+          <p class="ah">Collez un lien YouTube / Instagram ou téléversez un fichier audio (Paste a YouTube / Instagram link, or upload an audio file)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" id="card-pu">
+      <div class="sh" onclick="toggle('pu')">
+        <span class="sn">07</span>
+        <span class="sl">Prière universelle</span>
+        <span class="sbg v" id="bg-pu">0</span>
+        <i id="ch-pu" class="ti ti-chevron-down sch" style="transform:rotate(180deg);"></i>
+      </div>
+      <div class="sb op" id="b-pu">
+        <div class="np">
+          <div class="npi"><i class="ti ti-music"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="npl">Chant actuel (Currently assigned)</div>
+            <div class="nps">Les cris de ma prière</div>
+          </div>
+        </div>
+        <div class="sl2" id="sl-pu">
+          <p class="ns">Aucune suggestion — soyez le premier ! (No suggestions yet)</p>
+        </div>
+        <div class="aa">
+          <div class="at">
+            <input id="si-pu" type="text" placeholder="Nom du chant… (Song name…)" onkeydown="if(event.key==='Enter')add('pu')"/>
+            <button onclick="add('pu')">+ Ajouter (Add)</button>
+          </div>
+          <div class="am">
+            <input id="mi-pu" type="text" placeholder="Lien YouTube ou Instagram… (Paste link…)"/>
+            <label class="ul" for="fi-pu"><i class="ti ti-upload" style="font-size:13px;"></i> Audio</label>
+            <input class="fi" id="fi-pu" type="file" accept="audio/*" onchange="handleFile('pu',this)"/>
+          </div>
+          <p class="ah">Collez un lien YouTube / Instagram ou téléversez un fichier audio (Paste a YouTube / Instagram link, or upload an audio file)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" id="card-offertoire">
+      <div class="sh" onclick="toggle('offertoire')">
+        <span class="sn">08</span>
+        <span class="sl">Offertoire</span>
+        <span class="sbg v" id="bg-offertoire">0</span>
+        <i id="ch-offertoire" class="ti ti-chevron-down sch" style="transform:rotate(180deg);"></i>
+      </div>
+      <div class="sb op" id="b-offertoire">
+        <div class="np">
+          <div class="npi"><i class="ti ti-music"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="npl">Chant actuel (Currently assigned)</div>
+            <div class="nps">Tokobonzela</div>
+          </div>
+        </div>
+        <div class="sl2" id="sl-offertoire">
+          <p class="ns">Aucune suggestion — soyez le premier ! (No suggestions yet)</p>
+        </div>
+        <div class="aa">
+          <div class="at">
+            <input id="si-offertoire" type="text" placeholder="Nom du chant… (Song name…)" onkeydown="if(event.key==='Enter')add('offertoire')"/>
+            <button onclick="add('offertoire')">+ Ajouter (Add)</button>
+          </div>
+          <div class="am">
+            <input id="mi-offertoire" type="text" placeholder="Lien YouTube ou Instagram… (Paste link…)"/>
+            <label class="ul" for="fi-offertoire"><i class="ti ti-upload" style="font-size:13px;"></i> Audio</label>
+            <input class="fi" id="fi-offertoire" type="file" accept="audio/*" onchange="handleFile('offertoire',this)"/>
+          </div>
+          <p class="ah">Collez un lien YouTube / Instagram ou téléversez un fichier audio (Paste a YouTube / Instagram link, or upload an audio file)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" id="card-sanctus">
+      <div class="sh" onclick="toggle('sanctus')">
+        <span class="sn">09</span>
+        <span class="sl">Sanctus</span>
+        <span class="sbg v" id="bg-sanctus">0</span>
+        <i id="ch-sanctus" class="ti ti-chevron-down sch" style="transform:rotate(180deg);"></i>
+      </div>
+      <div class="sb op" id="b-sanctus">
+        <div class="np">
+          <div class="npi"><i class="ti ti-music"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="npl">Chant actuel (Currently assigned)</div>
+            <div class="nps">3 fois saint le Seigneur</div>
+          </div>
+        </div>
+        <div class="sl2" id="sl-sanctus">
+          <p class="ns">Aucune suggestion — soyez le premier ! (No suggestions yet)</p>
+        </div>
+        <div class="aa">
+          <div class="at">
+            <input id="si-sanctus" type="text" placeholder="Nom du chant… (Song name…)" onkeydown="if(event.key==='Enter')add('sanctus')"/>
+            <button onclick="add('sanctus')">+ Ajouter (Add)</button>
+          </div>
+          <div class="am">
+            <input id="mi-sanctus" type="text" placeholder="Lien YouTube ou Instagram… (Paste link…)"/>
+            <label class="ul" for="fi-sanctus"><i class="ti ti-upload" style="font-size:13px;"></i> Audio</label>
+            <input class="fi" id="fi-sanctus" type="file" accept="audio/*" onchange="handleFile('sanctus',this)"/>
+          </div>
+          <p class="ah">Collez un lien YouTube / Instagram ou téléversez un fichier audio (Paste a YouTube / Instagram link, or upload an audio file)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" id="card-agnus">
+      <div class="sh" onclick="toggle('agnus')">
+        <span class="sn">10</span>
+        <span class="sl">Agnus Dei</span>
+        <span class="sbg v" id="bg-agnus">0</span>
+        <i id="ch-agnus" class="ti ti-chevron-down sch" style="transform:rotate(180deg);"></i>
+      </div>
+      <div class="sb op" id="b-agnus">
+        <div class="np">
+          <div class="npi"><i class="ti ti-music"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="npl">Chant actuel (Currently assigned)</div>
+            <div class="nps">Mwami nyen ikigongwe</div>
+          </div>
+        </div>
+        <div class="sl2" id="sl-agnus">
+          <p class="ns">Aucune suggestion — soyez le premier ! (No suggestions yet)</p>
+        </div>
+        <div class="aa">
+          <div class="at">
+            <input id="si-agnus" type="text" placeholder="Nom du chant… (Song name…)" onkeydown="if(event.key==='Enter')add('agnus')"/>
+            <button onclick="add('agnus')">+ Ajouter (Add)</button>
+          </div>
+          <div class="am">
+            <input id="mi-agnus" type="text" placeholder="Lien YouTube ou Instagram… (Paste link…)"/>
+            <label class="ul" for="fi-agnus"><i class="ti ti-upload" style="font-size:13px;"></i> Audio</label>
+            <input class="fi" id="fi-agnus" type="file" accept="audio/*" onchange="handleFile('agnus',this)"/>
+          </div>
+          <p class="ah">Collez un lien YouTube / Instagram ou téléversez un fichier audio (Paste a YouTube / Instagram link, or upload an audio file)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" id="card-communion">
+      <div class="sh" onclick="toggle('communion')">
+        <span class="sn">11</span>
+        <span class="sl">Communion</span>
+        <span class="sbg v" id="bg-communion">0</span>
+        <i id="ch-communion" class="ti ti-chevron-down sch" style="transform:rotate(180deg);"></i>
+      </div>
+      <div class="sb op" id="b-communion">
+        <div class="np">
+          <div class="npi"><i class="ti ti-music"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="npl">Chant actuel (Currently assigned)</div>
+            <div class="nps">Tout</div>
+          </div>
+        </div>
+        <div class="sl2" id="sl-communion">
+          <p class="ns">Aucune suggestion — soyez le premier ! (No suggestions yet)</p>
+        </div>
+        <div class="aa">
+          <div class="at">
+            <input id="si-communion" type="text" placeholder="Nom du chant… (Song name…)" onkeydown="if(event.key==='Enter')add('communion')"/>
+            <button onclick="add('communion')">+ Ajouter (Add)</button>
+          </div>
+          <div class="am">
+            <input id="mi-communion" type="text" placeholder="Lien YouTube ou Instagram… (Paste link…)"/>
+            <label class="ul" for="fi-communion"><i class="ti ti-upload" style="font-size:13px;"></i> Audio</label>
+            <input class="fi" id="fi-communion" type="file" accept="audio/*" onchange="handleFile('communion',this)"/>
+          </div>
+          <p class="ah">Collez un lien YouTube / Instagram ou téléversez un fichier audio (Paste a YouTube / Instagram link, or upload an audio file)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" id="card-special">
+      <div class="sh" onclick="toggle('special')">
+        <span class="sn">12</span>
+        <span class="sl">Spécial</span>
+        <span class="sbg v" id="bg-special">0</span>
+        <i id="ch-special" class="ti ti-chevron-down sch" style="transform:rotate(180deg);"></i>
+      </div>
+      <div class="sb op" id="b-special">
+        <div class="np">
+          <div class="npi"><i class="ti ti-music"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="npl">Chant actuel (Currently assigned)</div>
+            <div class="nps">Dieu tout puissant</div>
+          </div>
+        </div>
+        <div class="sl2" id="sl-special">
+          <p class="ns">Aucune suggestion — soyez le premier ! (No suggestions yet)</p>
+        </div>
+        <div class="aa">
+          <div class="at">
+            <input id="si-special" type="text" placeholder="Nom du chant… (Song name…)" onkeydown="if(event.key==='Enter')add('special')"/>
+            <button onclick="add('special')">+ Ajouter (Add)</button>
+          </div>
+          <div class="am">
+            <input id="mi-special" type="text" placeholder="Lien YouTube ou Instagram… (Paste link…)"/>
+            <label class="ul" for="fi-special"><i class="ti ti-upload" style="font-size:13px;"></i> Audio</label>
+            <input class="fi" id="fi-special" type="file" accept="audio/*" onchange="handleFile('special',this)"/>
+          </div>
+          <p class="ah">Collez un lien YouTube / Instagram ou téléversez un fichier audio (Paste a YouTube / Instagram link, or upload an audio file)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" id="card-action">
+      <div class="sh" onclick="toggle('action')">
+        <span class="sn">13</span>
+        <span class="sl">Action de grâce</span>
+        <span class="sbg v" id="bg-action">0</span>
+        <i id="ch-action" class="ti ti-chevron-down sch" style="transform:rotate(180deg);"></i>
+      </div>
+      <div class="sb op" id="b-action">
+        <div class="np">
+          <div class="npi"><i class="ti ti-music"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="npl">Chant actuel (Currently assigned)</div>
+            <div class="nps">Kinya Medley</div>
+          </div>
+        </div>
+        <div class="sl2" id="sl-action">
+          <p class="ns">Aucune suggestion — soyez le premier ! (No suggestions yet)</p>
+        </div>
+        <div class="aa">
+          <div class="at">
+            <input id="si-action" type="text" placeholder="Nom du chant… (Song name…)" onkeydown="if(event.key==='Enter')add('action')"/>
+            <button onclick="add('action')">+ Ajouter (Add)</button>
+          </div>
+          <div class="am">
+            <input id="mi-action" type="text" placeholder="Lien YouTube ou Instagram… (Paste link…)"/>
+            <label class="ul" for="fi-action"><i class="ti ti-upload" style="font-size:13px;"></i> Audio</label>
+            <input class="fi" id="fi-action" type="file" accept="audio/*" onchange="handleFile('action',this)"/>
+          </div>
+          <p class="ah">Collez un lien YouTube / Instagram ou téléversez un fichier audio (Paste a YouTube / Instagram link, or upload an audio file)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" id="card-sortie">
+      <div class="sh" onclick="toggle('sortie')">
+        <span class="sn">14</span>
+        <span class="sl">Sortie</span>
+        <span class="sbg v" id="bg-sortie">0</span>
+        <i id="ch-sortie" class="ti ti-chevron-down sch" style="transform:rotate(180deg);"></i>
+      </div>
+      <div class="sb op" id="b-sortie">
+        <div class="np">
+          <div class="npi"><i class="ti ti-music"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="npl">Chant actuel (Currently assigned)</div>
+            <div class="nps">Ngiye gusingiza</div>
+          </div>
+        </div>
+        <div class="sl2" id="sl-sortie">
+          <p class="ns">Aucune suggestion — soyez le premier ! (No suggestions yet)</p>
+        </div>
+        <div class="aa">
+          <div class="at">
+            <input id="si-sortie" type="text" placeholder="Nom du chant… (Song name…)" onkeydown="if(event.key==='Enter')add('sortie')"/>
+            <button onclick="add('sortie')">+ Ajouter (Add)</button>
+          </div>
+          <div class="am">
+            <input id="mi-sortie" type="text" placeholder="Lien YouTube ou Instagram… (Paste link…)"/>
+            <label class="ul" for="fi-sortie"><i class="ti ti-upload" style="font-size:13px;"></i> Audio</label>
+            <input class="fi" id="fi-sortie" type="file" accept="audio/*" onchange="handleFile('sortie',this)"/>
+          </div>
+          <p class="ah">Collez un lien YouTube / Instagram ou téléversez un fichier audio (Paste a YouTube / Instagram link, or upload an audio file)</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="sbar">
+    <i class="ti ti-share" style="font-size:17px;color:#8a7a50;"></i>
+    <p>Partager avec votre chorale (Share with your choir)</p>
+    <button onclick="copyLink()"><i class="ti ti-copy" style="font-size:12px;margin-right:4px;vertical-align:-1px;"></i>Copier le lien (Copy link)</button>
+  </div>
+</div>
+
+<!-- PAGE 2: ALL SUGGESTIONS -->
+<div class="page" id="p2">
+  <div class="hero">
+    <div class="logo"><img src="data:image/jpeg;base64,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" alt="Aura Divine"/></div>
+    <div class="htxt">
+      <h1>Toutes les suggestions</h1>
+      <p>Parcourir · Filtrer · Trier (Browse · Filter · Sort)</p>
+    </div>
+    <div class="hbtn">
+      <button class="pbtn" onclick="goTo('p1')"><i class="ti ti-arrow-left"></i> Retour (Back)</button>
+    </div>
+  </div>
+  <div class="body" style="padding-top:1rem;">
+    <div class="sgrid" id="stats">
+      <div class="stc"><div class="stn" id="stat-sug">0</div><div class="stl">Suggestions</div></div>
+      <div class="stc"><div class="stn" id="stat-votes">0</div><div class="stl">Votes</div></div>
+      <div class="stc"><div class="stn" id="stat-sec">0</div><div class="stl">Sections actives</div></div>
+    </div>
+    <div class="ctrl">
+      <input id="srch" type="text" placeholder="Rechercher… (Search…)" oninput="renderAll()"/>
+      <select id="sf" onchange="renderAll()">
+        <option value="">Toutes les sections (All sections)</option>
+        <option value="entree">Entrée</option>
+<option value="kyrie">Kyrie</option>
+<option value="gloria">Gloria</option>
+<option value="meditation">Méditation</option>
+<option value="acclamation">Acclamation</option>
+<option value="credo">Credo</option>
+<option value="pu">Prière universelle</option>
+<option value="offertoire">Offertoire</option>
+<option value="sanctus">Sanctus</option>
+<option value="agnus">Agnus Dei</option>
+<option value="communion">Communion</option>
+<option value="special">Spécial</option>
+<option value="action">Action de grâce</option>
+<option value="sortie">Sortie</option>
+      </select>
+      <select id="ss" onchange="renderAll()">
+        <option value="votes">Plus votés (Top voted)</option>
+        <option value="new">Plus récents (Newest)</option>
+        <option value="old">Plus anciens (Oldest)</option>
+        <option value="az">A → Z</option>
+      </select>
+    </div>
+    <div id="alist"><p class="ns" style="padding:2rem;text-align:center;">Aucune suggestion pour l'instant (No suggestions yet)</p></div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, push, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  databaseURL: "https://aura-divine-anniversarymass-default-rtdb.firebaseio.com/"
+};
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+var SECS=[
+  {id:"entree",n:"Entrée",c:"Siyahamba"},
+  {id:"kyrie",n:"Kyrie",c:"Vois sur ton chemin"},
+  {id:"gloria",n:"Gloria",c:"Ton amour nous environne"},
+  {id:"meditation",n:"Méditation",c:"Mpora ngusaba"},
+  {id:"acclamation",n:"Acclamation",c:"Laudate Dominum"},
+  {id:"credo",n:"Credo",c:"Credo New"},
+  {id:"pu",n:"Prière universelle",c:"Les cris de ma prière"},
+  {id:"offertoire",n:"Offertoire",c:"Tokobonzela"},
+  {id:"sanctus",n:"Sanctus",c:"3 fois saint le Seigneur"},
+  {id:"agnus",n:"Agnus Dei",c:"Mwami nyen ikigongwe"},
+  {id:"communion",n:"Communion",c:"Tout"},
+  {id:"special",n:"Spécial",c:"Dieu tout puissant"},
+  {id:"action",n:"Action de grâce",c:"Kinya Medley"},
+  {id:"sortie",n:"Sortie",c:"Ngiye gusingiza"}
+];
+
+var state={};
+var voted={};
+var pa={};
+
+try{var sv=localStorage.getItem("adv10_v");if(sv)voted=JSON.parse(sv)}catch(e){}
+
+function saveVoted(){try{localStorage.setItem("adv10_v",JSON.stringify(voted))}catch(e){}}
+
+function uname(){return(document.getElementById("uname").value||"").trim()||"Anonyme"}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+
+function goTo(id){
+  document.querySelectorAll(".page").forEach(function(p){p.classList.remove("active")});
+  document.getElementById(id).classList.add("active");
+  window.scrollTo(0,0);
+  if(id==="p2")renderAll();
+}
+
+function setF(f,el){
+  document.querySelectorAll(".ft").forEach(function(t){t.classList.remove("on")});
+  el.classList.add("on");
+  SECS.forEach(function(s){
+    var card=document.getElementById("card-"+s.id);
+    if(!card)return;
+    if(f==="sug"){
+      card.style.display=(state[s.id]&&Object.keys(state[s.id]).length>0)?"block":"none";
+    }else{
+      card.style.display="block";
+    }
+  });
+}
+
+function toggle(id){
+  var b=document.getElementById("b-"+id),c=document.getElementById("ch-"+id);
+  if(!b)return;
+  var isOpen=b.classList.contains("op");
+  b.classList.toggle("op",!isOpen);
+  if(c)c.style.transform=!isOpen?"rotate(180deg)":"";
+}
+
+function handleFile(id,inp){
+  var f=inp.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(e){pa[id]=e.target.result};
+  r.readAsDataURL(f);
+}
+
+function add(id){
+  var si=document.getElementById("si-"+id),mi=document.getElementById("mi-"+id);
+  var v=(si.value||"").trim();if(!v)return;
+  var item={t:v,by:uname(),votes:0,ts:Date.now()};
+  var mu=(mi.value||"").trim();
+  if(mu){
+    if(/youtu/.test(mu))item.media={type:"yt",url:mu};
+    else if(/instagram/.test(mu))item.media={type:"ig",url:mu};
+    else item.media={type:"link",url:mu};
+  }
+  if(pa[id]){item.media={type:"audio",data:pa[id]};delete pa[id];}
+  push(ref(db,"suggestions/"+id), item);
+  si.value="";mi.value="";
+  var fi=document.getElementById("fi-"+id);if(fi)fi.value="";
+}
+
+function vote(sid,iid){
+  var k=sid+"_"+iid;
+  var itemRef=ref(db,"suggestions/"+sid+"/"+iid+"/votes");
+  if(voted[k]){
+    runTransaction(itemRef,function(v){return(v||0)-1<0?0:(v||0)-1});
+    delete voted[k];
+  }else{
+    runTransaction(itemRef,function(v){return(v||0)+1});
+    voted[k]=true;
+  }
+  saveVoted();
+}
+
+function voteAll(sid,iid){vote(sid,iid);}
+
+function mHTML(m){
+  if(!m)return"";
+  if(m.type==="yt")return'<a class="mc" href="'+esc(m.url)+'" target="_blank" rel="noopener"><i class="ti ti-brand-youtube" style="color:#ef4444;font-size:14px;"></i>YouTube</a>';
+  if(m.type==="ig")return'<a class="mc" href="'+esc(m.url)+'" target="_blank" rel="noopener"><i class="ti ti-brand-instagram" style="color:#c13584;font-size:14px;"></i>Instagram</a>';
+  if(m.type==="link")return'<a class="mc" href="'+esc(m.url)+'" target="_blank" rel="noopener"><i class="ti ti-link" style="font-size:13px;"></i>'+esc(m.url.replace(/^https?:\/\//,"").substring(0,30))+'</a>';
+  if(m.type==="audio"&&m.data)return'<audio controls src="'+m.data+'"></audio>';
+  return"";
+}
+
+function refreshSection(id,data){
+  var el=document.getElementById("sl-"+id);
+  var badge=document.getElementById("bg-"+id);
+  var sugs=[];
+  if(data){
+    Object.keys(data).forEach(function(k){
+      sugs.push(Object.assign({},data[k],{fbKey:k}));
+    });
+  }
+  sugs.sort(function(a,b){return(b.votes||0)-(a.votes||0)});
+  if(badge){
+    if(sugs.length>0){badge.textContent=sugs.length;badge.classList.add("v");}
+    else{badge.textContent="0";badge.classList.remove("v");}
+  }
+  if(!el)return;
+  if(!sugs.length){el.innerHTML='<p class="ns">Aucune suggestion — soyez le premier ! (No suggestions yet)</p>';return;}
+  var h="";
+  sugs.forEach(function(it){
+    var k=id+"_"+it.fbKey,on=!!voted[k];
+    h+='<div class="si"><button class="vb'+(on?" on":"")+'" onclick="vote(''+id+'',''+it.fbKey+'')" aria-label="Voter"><i class="ti ti-chevron-up"></i><span>'+(it.votes||0)+'</span></button><div class="sc2"><div class="st">'+esc(it.t)+'</div><div class="sm">par (by) '+esc(it.by)+'</div>'+mHTML(it.media)+'</div></div>';
+  });
+  el.innerHTML=h;
+  if(document.getElementById("p2").classList.contains("active"))renderAll();
+}
+
+function renderAll(){
+  var q=(document.getElementById("srch").value||"").toLowerCase();
+  var sf=document.getElementById("sf").value;
+  var ss=document.getElementById("ss").value;
+  var all=[];
+  SECS.forEach(function(s){
+    var data=state[s.id]||{};
+    Object.keys(data).forEach(function(k){
+      var it=data[k];
+      all.push({t:it.t,by:it.by,votes:it.votes||0,fbKey:k,ts:it.ts||0,media:it.media,secId:s.id,secN:s.n});
+    });
+  });
+  var totalSug=all.length;
+  var totalVotes=all.reduce(function(a,x){return a+(x.votes||0)},0);
+  var activeSec=SECS.filter(function(s){return Object.keys(state[s.id]||{}).length>0}).length;
+  document.getElementById("stat-sug").textContent=totalSug;
+  document.getElementById("stat-votes").textContent=totalVotes;
+  document.getElementById("stat-sec").textContent=activeSec;
+  if(sf)all=all.filter(function(x){return x.secId===sf});
+  if(q)all=all.filter(function(x){return x.t.toLowerCase().indexOf(q)>=0||x.by.toLowerCase().indexOf(q)>=0});
+  if(ss==="votes")all.sort(function(a,b){return(b.votes||0)-(a.votes||0)});
+  else if(ss==="new")all.sort(function(a,b){return(b.ts||0)-(a.ts||0)});
+  else if(ss==="old")all.sort(function(a,b){return(a.ts||0)-(b.ts||0)});
+  else all.sort(function(a,b){return a.t.localeCompare(b.t)});
+  var con=document.getElementById("alist");
+  if(!all.length){con.innerHTML='<p class="ns" style="padding:2rem;text-align:center;">No suggestions yet — be the first!</p>';return;}
+  var h="";
+  all.forEach(function(it){
+    var k=it.secId+"_"+it.fbKey,on=!!voted[k];
+    h+='<div class="ac"><span class="atg">'+esc(it.secN)+'</span><div class="att">'+esc(it.t)+'</div><div class="atm">par (by) '+esc(it.by)+'</div>'+mHTML(it.media)+'<div class="af"><button class="vw'+(on?" on":"")+'" onclick="voteAll(''+it.secId+'',''+it.fbKey+'')"><i class="ti ti-chevron-up" style="font-size:14px;"></i>'+(it.votes||0)+' vote'+((it.votes||0)!==1?"s":"")+'</button></div></div>';
+  });
+  con.innerHTML=h;
+}
+
+function copyLink(){
+  if(navigator.clipboard)navigator.clipboard.writeText(window.location.href).then(function(){
+    var b=document.querySelector(".sbar button");
+    var orig=b.innerHTML;
+    b.textContent="Copied!";
+    setTimeout(function(){b.innerHTML=orig},2000);
+  });
+}
+
+// Listen to all sections in real time
+SECS.forEach(function(s){
+  onValue(ref(db,"suggestions/"+s.id), function(snapshot){
+    state[s.id]=snapshot.val()||{};
+    refreshSection(s.id, state[s.id]);
+  });
+});
+
+window.goTo=goTo;
+window.setF=setF;
+window.toggle=toggle;
+window.handleFile=handleFile;
+window.add=add;
+window.vote=vote;
+window.voteAll=voteAll;
+window.renderAll=renderAll;
+window.copyLink=copyLink;
+</script>
+</body>
+</html>
